@@ -1,0 +1,19 @@
+version: "3"
+services:
+  squares:
+    build: .
+    image: sumeetagrawal/squares
+    container_name: squares
+    ports:
+      - "3000:8050"
+    environment:
+      - NUMBER=5
+    volumes:
+      - .:/usr/share/learning/docker
+  #Automatioc Network between squares and nginx
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - squares

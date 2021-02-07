@@ -1,0 +1,19 @@
+version: "3"
+services:
+  alpine1:
+    image: alpine
+    entrypoint: "ping nginx"
+    depends_on:
+      - nginx
+  alpine2:
+    image: alpine
+    entrypoint: "wget nginx"
+    working_dir: /a/b/c
+    volumes:
+    - .:/a/b/c
+    depends_on:
+      - nginx
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
