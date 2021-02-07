@@ -1,6 +1,6 @@
 # Learning Selenium With Docker
 
-###Maven Command to create package
+### Maven Command to create package
 `mvn clean -DskipTests=true package`
 
 ### Command should be executed from target directory..
