@@ -17,13 +17,5 @@ services:
       - hub
     environment:
       - HUB_HOST=hub
-  naukri_modules:
-    image: sumeet0420/selenium-docker
-    depends_on:
-      - chrome
-      - firefox
-    environment:
-      - HUB_HOST=hub
-      - MODULE=naukri-tests.xml
-    volumes:
-      - ./docker-volumes:/usr/learnig/docker/test-output
+
+#docker-compose up --scale chrome=4

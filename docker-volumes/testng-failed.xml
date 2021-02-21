@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Naukri-Test-module]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Naukri Test(failed)">
+    <classes>
+      <class name="docker.learning.tests.NaukriTest">
+        <methods>
+          <include name="naukri"/>
+          <include name="quitDriver"/>
+          <include name="setupDriver"/>
+        </methods>
+      </class> <!-- docker.learning.tests.NaukriTest -->
+    </classes>
+  </test> <!-- Naukri Test(failed) -->
+</suite> <!-- Failed suite [Naukri-Test-module] -->

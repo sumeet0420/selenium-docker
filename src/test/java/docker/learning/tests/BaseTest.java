@@ -1,11 +1,9 @@
 package docker.learning.tests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
@@ -14,42 +12,29 @@ import org.testng.annotations.BeforeTest;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Optional;
 
 public class BaseTest {
 
     protected WebDriver driver;
 
     @BeforeTest
-    public void setupDriver(ITestContext ctx) throws MalformedURLException {
-        // BROWSER => chrome / firefox
-        // HUB_HOST => localhost / 10.0.1.3 / hostname
-
-        String host = "localhost";
-        DesiredCapabilities dc = new DesiredCapabilities();
-
-        if(System.getProperty("BROWSER") != null &&
-                System.getProperty("BROWSER").equalsIgnoreCase("firefox")){
-            WebDriverManager.firefoxdriver().setup();
-        }else{
-            WebDriverManager.chromedriver().setup();
-        }
-
-        if(System.getProperty("HUB_HOST") != null){
-            host = System.getProperty("HUB_HOST");
-        }
-
+    public void setupDriver(ITestContext ctx) throws MalformedURLException, InterruptedException {
+        Thread.sleep(4000);
+        String host = Optional.ofNullable(System.getProperty("HUB_HOST"))
+                .orElse("http://172.17.60.81:4444/wd/hub");
+        System.out.println("host: "+host);
         String testName = ctx.getCurrentXmlTest().getName();
-
-        String completeUrl = "https://2886795309-4444-ollie02.environments.katacoda.com/wd/hub";
-        //String completeUrl = "http://" + host + ":4444/wd/hub";
+        //Setting up capabilities to be used
+        DesiredCapabilities dc = new DesiredCapabilities();
         dc.setCapability("name", testName);
-        //this.driver = new RemoteWebDriver(new URL(completeUrl), dc);
-//        String chrome_path = docker.learning.tests.BaseTest.class.getClassLoader().getResource("chromedriver.exe").getFile();
-//        System.setProperty("webdriver.chrome.driver", chrome_path);
-//        System.setProperty("webdriver.chrome.silentOutput", "true");
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        dc.setCapability(CapabilityType.PLATFORM_NAME, Platform.ANY);
+        dc.setCapability(CapabilityType.BROWSER_NAME, BrowserType.FIREFOX);
+        final URL url = new URL("http://" + host + ":4444/wd/hub");
+        System.out.println("url: "+url);
+        this.driver = new RemoteWebDriver(url, dc);
         driver.manage().window().maximize();
+        System.out.println(dc.getCapability(CapabilityType.PLATFORM_NAME));
     }
 
     @AfterTest

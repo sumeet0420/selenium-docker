@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="book-flight-module" parallel="classes">
+    <parameter name="noOfPassengers" value="1"></parameter>
+    <parameter name="expectedPrice" value="500"></parameter>
+    <test name="Flight Test">
+        <classes>
+            <class name="docker.learning.tests.BookFlightTest"></class>
+            <class name="docker.learning.tests.HelloActions"></class>
+        </classes>
+    </test>
+</suite>

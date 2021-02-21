@@ -1,4 +1,5 @@
 package docker.learning;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,11 +24,13 @@ public class FindFlightPage {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 30);
         PageFactory.initElements(driver, this);
+        new WebDriverWait(driver, 20).until(chromeDriver -> chromeDriver
+                .getTitle().startsWith("Hello1"));
     }
 
     public void submitFindFlightPage(){
-        this.wait.until(driver->ExpectedConditions.elementToBeClickable(this.firstSubmitBtn));
         this.firstSubmitBtn.click();
+        this.wait.until(driver->ExpectedConditions.elementToBeClickable(this.firstSubmitBtn));
     }
 
     public void goToFlightConfirmationPage(){

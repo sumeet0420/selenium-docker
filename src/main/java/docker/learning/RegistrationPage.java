@@ -36,7 +36,7 @@ public class RegistrationPage {
 
     public RegistrationPage(WebDriver driver){
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 30);
+        this.wait = new WebDriverWait(driver, 5);
         PageFactory.initElements(driver, this);
     }
 
@@ -44,7 +44,7 @@ public class RegistrationPage {
         this.driver.get(FLIGHT_HOME_PAGE);
         this.wait.until(driver->ExpectedConditions.visibilityOf(this.firstNameTxt));
         this.wait.until(driver->ExpectedConditions.visibilityOf(this.firstNameTxt));
-        wait.until(driver -> driver.findElements(By.xpath("")).stream().allMatch(webElement -> webElement.isDisplayed()));
+        //wait.until(driver -> driver.findElements(By.xpath("")).stream().allMatch(webElement -> webElement.isDisplayed()));
 
     }
 

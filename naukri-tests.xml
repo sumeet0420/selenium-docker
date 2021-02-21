@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Naukri-Test-module">
+    <test name="Naukri Test">
+        <classes>
+            <class name="docker.learning.tests.NaukriTest"></class>
+        </classes>
+    </test>
+</suite>

@@ -4,6 +4,7 @@ import docker.learning.*;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -37,10 +38,11 @@ public class BookFlightTest extends BaseTest{
     public void flightDetailsPage(){
         FlightDetailsPage flightDetailsPage = new FlightDetailsPage(driver);
         flightDetailsPage.selectPassengers(noOfPassengers);
-        flightDetailsPage.goToFindFlightsPage();
-        new Actions(driver).sendKeys("Hello").build().perform();
+        //flightDetailsPage.goToFindFlightsPage();
+        //new Actions(driver).sendKeys("Hello").build().perform();
     }
 
+    @Ignore
     @Test(dependsOnMethods = "flightDetailsPage")
     public void findFlightPage(){
         FindFlightPage findFlightPage = new FindFlightPage(driver);
@@ -48,7 +50,7 @@ public class BookFlightTest extends BaseTest{
         findFlightPage.goToFlightConfirmationPage();
     }
 
-    @Test(dependsOnMethods = "findFlightPage")
+    @Ignore @Test(dependsOnMethods = "findFlightPage")
     public void flightConfirmationPage(){
         FlightConfirmationPage flightConfirmationPage = new FlightConfirmationPage(driver);
         String actualPrice = flightConfirmationPage.getPrice();
